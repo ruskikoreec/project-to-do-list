@@ -22,7 +22,7 @@ namespace Project
     /// </summary>
     public partial class MainWindow : Window
     {
-        private BindingList<ToDoModel> _todoData;
+        private BindingList<ToDoModel> _todoDataList;
         public MainWindow()
         {
             InitializeComponent();
@@ -30,12 +30,28 @@ namespace Project
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            _todoData = new BindingList<ToDoModel>()
+            _todoDataList = new BindingList<ToDoModel>()
             {
                 new ToDoModel(){Text="test" },
                 new ToDoModel(){Text="tksdjl"}
             };
-            dgToDoList.ItemsSource = _todoData;
+            dgToDoList.ItemsSource = _todoDataList;
+            _todoDataList.ListChanged += _todoDataList_ListChanged;
+        }
+
+        private void _todoDataList_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            switch(e.ListChangedType)
+            {
+                case ListChangedType.Reset:
+                    break;
+                case ListChangedType.ItemDeleted:
+                    break;
+                case ListChangedType.ItemMoved:
+                    break;
+                case ListChangedType.ItemChanged:
+                    break;
+            }
         }
     }
 }
