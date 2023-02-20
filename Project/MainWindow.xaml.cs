@@ -30,7 +30,12 @@ namespace Project
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            _todoData = new BindingList<ToDoModel>()
+            {
+                new ToDoModel(){Text="test" },
+                new ToDoModel(){Text="tksdjl"}
+            };
+            dgToDoList.ItemsSource = _todoData;
         }
     }
 }
