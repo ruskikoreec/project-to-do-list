@@ -32,7 +32,7 @@ namespace Project.Service
                 return JsonConvert.DeserializeObject<BindingList<ToDoModel>>(fileText);
             }
         }
-        public void SaveData(BindingList<ToDoModel> todoDataList)
+        public void SaveData(object todoDataList)
         {
             using(StreamWriter writer = File.CreateText(FilePath))
             {

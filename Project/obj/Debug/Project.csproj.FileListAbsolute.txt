@@ -45,3 +45,6 @@ C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Deb
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Debug\Project.exe
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Debug\Project.pdb
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Debug\Project.csproj.CopyComplete
