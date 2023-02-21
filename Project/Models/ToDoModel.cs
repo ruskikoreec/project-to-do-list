@@ -23,7 +23,7 @@ namespace Project.Models
                 if (_isDone == value)
                     return;
                 _isDone = value;
-                OnPropertyChanged();
+                OnPropertyChanged("IsDone");
             }
         }
         public string Text
@@ -34,7 +34,7 @@ namespace Project.Models
                 if (_text == value)
                     return;
                 _text = value;
-                OnPropertyChanged();
+                OnPropertyChanged("Text");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
