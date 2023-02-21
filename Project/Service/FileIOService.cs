@@ -19,7 +19,18 @@ namespace Project.Service
         }
         public BindingList<ToDoModel> LoadData()
         {
-            return null;
+            var fileExists = File.Exists(FilePath);
+            if(!fileExists)
+            {
+                File.CreateText(FilePath).Dispose();
+                return new BindingList<ToDoModel>();
+
+            }
+            using (var reader = File.OpenText(FilePath))
+            {
+                var fileText = reader.ReadToEnd();
+                return JsonConvert.DeserializeObject<BindingList<ToDoModel>>(fileText);
+            }
         }
         public void SaveData(BindingList<ToDoModel> todoDataList)
         {
