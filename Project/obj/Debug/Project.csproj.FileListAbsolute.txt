@@ -48,3 +48,6 @@ C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Deb
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Debug\Project.csproj.CopyComplete
+C:\Users\feodo\Documents\GitHub\project-to-do-list\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\feodo\Documents\GitHub\project-to-do-list\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\feodo\Documents\GitHub\project-to-do-list\Project\obj\Debug\Project.csproj.CopyComplete

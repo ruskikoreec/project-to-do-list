@@ -11,7 +11,20 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=CreationDate}" IsReadOnly="True"  Header="CreationDate" Width="180"/>
                 <DataGridCheckBoxColumn Binding="{Binding Path=IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
-                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="ToDo" Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="ToDo" Width="280"/>
+                <DataGridTemplateColumn Header="DeadLine" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding myDate}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding myDate}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
