@@ -4,11 +4,11 @@
 winexe
 C#
 .cs
-C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Debug\
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\obj\Release\
 Project
 none
 false
-DEBUG;TRACE
+TRACE
 C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\App.xaml
 1219584333
 
@@ -16,5 +16,5 @@ C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\Project\App.xam
 14-224434930
 MainWindow.xaml;
 
-False
+True
 

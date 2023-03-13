@@ -15,12 +15,12 @@
                 <DataGridTemplateColumn Header="DeadLine" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding myDate}" />
+                            <TextBlock Text="{Binding Path= Deadline}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding myDate}" />
+                            <DatePicker SelectedDate="{Binding Path=Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>

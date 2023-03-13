@@ -13,6 +13,7 @@ namespace Project.Models
         public DateTime CreationDate { get; set; } = DateTime.Now;
         private string _text;
         private bool _isDone;
+        private DateTime _deadline = DateTime.Now;
 
 
         public bool IsDone
@@ -35,6 +36,17 @@ namespace Project.Models
                     return;
                 _text = value;
                 OnPropertyChanged("Text");
+            }
+        }
+        public DateTime Deadline
+        {
+            get { return _deadline; }
+            set
+            {
+                if (_deadline == value)
+                    return;
+                _deadline = value;
+                OnPropertyChanged("Deadline");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
