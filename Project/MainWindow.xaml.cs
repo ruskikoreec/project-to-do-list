@@ -1,5 +1,4 @@
 ﻿using Project.Models;
-using Project.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,9 +22,7 @@ namespace Project
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly string FilePath = $"{Environment.CurrentDirectory}\\todoDataList.json";
-        private BindingList<ToDoModel> _todoDataList;
-        private FileIOService fileIOService;
+        private BindingList<ToDoModel> _todoData;
         public MainWindow()
         {
             InitializeComponent();
@@ -33,35 +30,12 @@ namespace Project
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            fileIOService = new FileIOService(FilePath);
-            try
+            _todoData = new BindingList<ToDoModel>()
             {
-                _todoDataList = fileIOService.LoadData();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Close();
-            }
-            
-            dgToDoList.ItemsSource = _todoDataList;
-            _todoDataList.ListChanged += _todoDataList_ListChanged;
-        }
-
-        private void _todoDataList_ListChanged(object sender, ListChangedEventArgs e)
-        {
-            if (e.ListChangedType== ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
-            {
-                try
-                {
-                    fileIOService.SaveData(sender);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    Close();
-                }
-            }
+                new ToDoModel(){Text="test" },
+                new ToDoModel(){Text="tksdjl"}
+            };
+            dgToDoList.ItemsSource = _todoData;
         }
     }
 }
