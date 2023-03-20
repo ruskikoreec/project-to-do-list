@@ -24,6 +24,10 @@ namespace Project
     /// </summary>
     public partial class MainWindow : Window
     {
+        //void SetProperties()
+        //{
+        //    this.Icon=
+        //}
         private readonly string FilePath = $"{Environment.CurrentDirectory}\\todoDataList.json";
         private BindingList<ToDoModel> _todoDataList;
         private FileIOService fileIOService;
