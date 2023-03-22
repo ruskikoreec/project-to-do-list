@@ -6,6 +6,12 @@
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
         Title="ToDoProject" Height="450" Width="800" Icon="/Icon/todo.ico" Loaded="Window_Loaded" Background="#FF8ABFBF" Foreground="{x:Null}" FontFamily="Lucida Sans">
+    <Window.Resources>
+        <local:DateToColorConverter x:Key="DateToColorConverter"/>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Background" Value="{Binding Deadline, Converter={StaticResource DateToColorConverter}}" />
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

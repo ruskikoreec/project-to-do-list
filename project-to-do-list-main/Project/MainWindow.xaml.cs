@@ -3,6 +3,7 @@ using Project.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,7 @@ namespace Project
                 this.myDateTime.Text = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
             }, this.Dispatcher);
             timer.Start();
+            
         }
 
         private void _todoDataList_ListChanged(object sender, ListChangedEventArgs e)
@@ -75,4 +77,5 @@ namespace Project
             }
         }
     }
+    
 }

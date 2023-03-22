@@ -88,3 +88,23 @@ C:\Users\feodo\Documents\GitHub\project-to-do-list\project-to-do-list-main\Proje
 C:\Users\feodo\Documents\GitHub\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.csproj.CopyComplete
 C:\Users\feodo\Documents\GitHub\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.exe
 C:\Users\feodo\Documents\GitHub\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.pdb
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\bin\Debug\Project.exe.config
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\bin\Debug\Project.exe
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\bin\Debug\Project.pdb
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.csproj.AssemblyReference.cache
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.csproj.SuggestedBindingRedirects.cache
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\MainWindow.g.cs
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\App.g.cs
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project_MarkupCompile.cache
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project_MarkupCompile.lref
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\MainWindow.baml
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.g.resources
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.Properties.Resources.resources
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.csproj.GenerateResource.cache
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.csproj.CoreCompileInputs.cache
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.csproj.CopyComplete
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.exe
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\Project.pdb
+C:\Users\Vsevolod&Isterichka\Desktop\tipa git\project-to-do-list\project-to-do-list-main\Project\obj\Debug\GeneratedInternalTypeHelper.g.cs
