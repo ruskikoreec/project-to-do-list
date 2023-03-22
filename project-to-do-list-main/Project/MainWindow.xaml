@@ -8,7 +8,7 @@
         Title="ToDoProject" Height="450" Width="800" Icon="/Icon/todo.ico" Loaded="Window_Loaded" Background="#FF8ABFBF" Foreground="{x:Null}" FontFamily="Lucida Sans">
     <Window.Resources>
         <local:DateToColorConverter x:Key="DateToColorConverter"/>
-        <Style TargetType="{x:Type DataGridRow}">
+        <Style x:Key="DateStyle" TargetType="{x:Type DataGridCell}">
             <Setter Property="Background" Value="{Binding Deadline, Converter={StaticResource DateToColorConverter}}" />
         </Style>
     </Window.Resources>
@@ -27,7 +27,7 @@
                 <DataGridTextColumn Binding="{Binding Path=CreationDate}" IsReadOnly="True"  Header="CreationDate" Width="180"/>
                 <DataGridCheckBoxColumn Binding="{Binding Path=IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
                 <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="ToDo" Width="280"/>
-                <DataGridTemplateColumn Header="DeadLine" Width="*">
+                <DataGridTemplateColumn Header="DeadLine" Width="*" CellStyle="{StaticResource DateStyle}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path= Deadline}" />
