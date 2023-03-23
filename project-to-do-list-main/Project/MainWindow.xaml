@@ -20,22 +20,21 @@
         <StatusBar Grid.Row="1">
             <TextBlock x:FieldModifier="private" x:Name="myDateTime"/>
         </StatusBar>
-        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="ExtraBlack" Margin="10" AutoGenerateColumns="False">
-            
+        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="ExtraBlack" Margin="10,47,10,10" AutoGenerateColumns="False"  Height="340">  
             <DataGrid.Columns>
                 
-                <DataGridTextColumn Binding="{Binding Path=CreationDate}" IsReadOnly="True"  Header="CreationDate" Width="180"/>
-                <DataGridCheckBoxColumn Binding="{Binding Path=IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
-                <DataGridTextColumn Binding="{Binding Path=Text}" IsReadOnly="False" Header="ToDo" Width="280"/>
+                <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True"  Header="CreationDate" Width="180"/>
+                <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
+                <DataGridTextColumn Binding="{Binding Text}" SortMemberPath="ToDo" IsReadOnly="False" Header="ToDo" Width="280"/>
                 <DataGridTemplateColumn Header="DeadLine" Width="*" CellStyle="{StaticResource DateStyle}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path= Deadline}" />
+                            <TextBlock Text="{Binding  Deadline}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Path=Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}" />
+                            <DatePicker SelectedDate="{Binding Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}" />
                             
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
@@ -44,9 +43,8 @@
             </DataGrid.Columns>
             
         </DataGrid>
-        <!--<Border  Width="250" Background="#FF8ABFBF" VerticalAlignment="Bottom" HorizontalAlignment="Right" Padding="20" CornerRadius="10">
-
-        </Border>-->
         
+        <!--<TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged" Height="35" Margin="0,2,0,350" />-->
+
     </Grid>
 </Window>

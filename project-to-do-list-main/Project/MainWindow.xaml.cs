@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Data;
 
 namespace Project
 {
@@ -36,8 +37,8 @@ namespace Project
         {
             InitializeComponent();
         }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+ 
+            private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             fileIOService = new FileIOService(FilePath);
             try
@@ -76,6 +77,49 @@ namespace Project
                 }
             }
         }
+        //    private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        //{
+        //    e.Handled = true;
+
+        //    DataGridColumn column = e.Column;
+        //    ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+        //    column.SortDirection = direction;
+
+        //    ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
+        //    view.SortDescriptions.Clear();
+        //    view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
+        //    view.Refresh();
+        //}
+        //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    string searchText = SearchBox.Text;
+        //    List<MyItem> filteredItems = allItems.Where(item => item.Name.Contains(searchText)).ToList();
+        //    dgToDoList.ItemsSource = filteredItems;
+        //}
+        //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    ICollectionView cv = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
+        //    if (cv == null)
+        //        return;
+        //    if (!string.IsNullOrEmpty(SearchBox.Text))
+        //    {
+        //        cv.Filter = o =>
+        //        {
+        //            if (o is ToDoModel item)
+        //            {
+
+        //                return item.Text.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+        //            }
+        //            return false;
+        //        };
+        //    }
+        //    else
+        //    {
+        //        cv.Filter = null;
+        //    }
+        //}
+
     }
-    
+
 }
