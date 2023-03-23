@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
-        Title="ToDoProject" Height="450" Width="800" Icon="/Icon/todo.ico" Loaded="Window_Loaded" Background="#FF8ABFBF" Foreground="{x:Null}" FontFamily="Lucida Sans">
+        Title="Список дел" Height="450" Width="800" Icon="/Icon/todo.ico" Loaded="Window_Loaded" Background="#FF8ABFBF" Foreground="{x:Null}" FontFamily="Lucida Sans">
     <Window.Resources>
         <local:DateToColorConverter x:Key="DateToColorConverter"/>
         <Style x:Key="DateStyle" TargetType="{x:Type DataGridCell}">
@@ -19,32 +19,49 @@
         </Grid.RowDefinitions>
         <StatusBar Grid.Row="1">
             <TextBlock x:FieldModifier="private" x:Name="myDateTime"/>
+            
         </StatusBar>
-        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="ExtraBlack" Margin="10,47,10,10" AutoGenerateColumns="False"  Height="340">  
+        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="Bold" Margin="10,63,10,10" AutoGenerateColumns="False" >
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
+
                 
-                <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True"  Header="CreationDate" Width="180"/>
-                <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Done" Width="80"/>
-                <DataGridTextColumn Binding="{Binding Text}" SortMemberPath="ToDo" IsReadOnly="False" Header="ToDo" Width="280"/>
-                <DataGridTemplateColumn Header="DeadLine" Width="*" CellStyle="{StaticResource DateStyle}">
+                <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Выполнено" Width="112" />
+                <DataGridTextColumn Binding="{Binding Text}" SortMemberPath="ToDo" IsReadOnly="False" Header="Нужно сделать" Width="280"/>
+                <DataGridTemplateColumn Header="Срок" Width="*" CellStyle="{StaticResource DateStyle}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding  Deadline}" />
+                            <TextBlock Text="{Binding  Deadline}" TextAlignment="Center" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}" />
                             
+                            <DatePicker SelectedDate="{Binding Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}" />
+
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-
+                <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True"  Header="Дата Создания" Width="180"/>
             </DataGrid.Columns>
-            
+
         </DataGrid>
-        
-        <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged" Height="35"  Margin="10,15,10,362" />
+        <StackPanel>
+            <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  Margin="151,15,10,342" FontSize="22"
+
+            HorizontalAlignment="Stretch" 
+            VerticalAlignment="Stretch"
+            Width="Auto"
+            Height="Auto" />
+
+        </StackPanel>
+        <TextBox x:Name="Search"  Margin="31,10,650,347" FontSize="28" Text="Поиск:" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
+ />
+
 
     </Grid>
 </Window>
