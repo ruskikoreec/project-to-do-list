@@ -44,7 +44,7 @@
             
         </DataGrid>
         
-        <!--<TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged" Height="35" Margin="0,2,0,350" />-->
+        <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged" Height="35"  Margin="10,15,10,362" />
 
     </Grid>
 </Window>

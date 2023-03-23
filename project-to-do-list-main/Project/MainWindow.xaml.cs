@@ -77,26 +77,26 @@ namespace Project
                 }
             }
         }
-        //    private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
-        //{
-        //    e.Handled = true;
+        private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            e.Handled = true;
 
-        //    DataGridColumn column = e.Column;
-        //    ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            DataGridColumn column = e.Column;
+            ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
-        //    column.SortDirection = direction;
+            column.SortDirection = direction;
 
-        //    ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
-        //    view.SortDescriptions.Clear();
-        //    view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
-        //    view.Refresh();
-        //}
-        //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    string searchText = SearchBox.Text;
-        //    List<MyItem> filteredItems = allItems.Where(item => item.Name.Contains(searchText)).ToList();
-        //    dgToDoList.ItemsSource = filteredItems;
-        //}
+            ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
+            view.Refresh();
+        }
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchBox.Text;
+            List<ToDoModel> filteredItems = _todoDataList.Where(item => item.Text.Contains(searchText)).ToList();
+            dgToDoList.ItemsSource = filteredItems;
+        }
         //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         //{
         //    ICollectionView cv = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
