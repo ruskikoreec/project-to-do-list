@@ -19,6 +19,13 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
+        <!-- Toolbar -->
+        <ToolBar Grid.Row="0" VerticalAlignment="Top">
+            <ComboBox x:Name="fontComboBox" Width="120" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
+                      SelectedItem="{Binding FontFamily, ElementName=dataGrid}" />
+            <Button Content="Apply" Click="Button_Click" />
+        </ToolBar>
+
         <StatusBar Grid.Row="1">
             <StatusBarItem HorizontalContentAlignment="Right">
                 <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}Время: {0:HH:mm:ss} Дата: {0:dd.MM.yyyy}'}" x:Name="myDateTime" />
@@ -26,7 +33,7 @@
             </StatusBarItem>
 
         </StatusBar>
-        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="Bold" Margin="10,63,10,10" AutoGenerateColumns="False" >
+        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="Bold" Margin="10,67,10,6" AutoGenerateColumns="False" >
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -56,7 +63,7 @@
 
         </DataGrid>
         <StackPanel>
-            <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  Margin="151,15,10,342" FontSize="22"
+            <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  Margin="151,30,10,342" FontSize="22"
 
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch"
@@ -64,7 +71,7 @@
             Height="Auto" />
 
         </StackPanel>
-        <TextBox x:Name="Search"  Margin="31,10,650,347" FontSize="28" Text="Поиск:" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
+        <TextBox x:Name="Search"  Margin="31,24,650,333" FontSize="28" Text="Поиск:" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
  />
 
 

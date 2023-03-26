@@ -18,18 +18,15 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Data;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace Project
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
-        //void SetProperties()
-        //{
-        //    this.Icon=
-        //}
+
         private readonly string FilePath = $"{Environment.CurrentDirectory}\\todoDataList.json";
         private BindingList<ToDoModel> _todoDataList;
         private FileIOService fileIOService;
@@ -77,48 +74,47 @@ namespace Project
                 }
             }
         }
-        private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
-        {
-            e.Handled = true;
+        public void FillListWithData()
+        { 
+        // Создание файла для записи сериализованных данных
+        FileStream fileStream = new FileStream("myList.bin", FileMode.Create);
 
-            DataGridColumn column = e.Column;
-            ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+        // Создание объекта BinaryFormatter для сериализации списка
+        BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-            column.SortDirection = direction;
+        // Сериализация списка в файл
+        binaryFormatter.Serialize(fileStream, dgToDoList);
 
-            ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
-            view.SortDescriptions.Clear();
-            view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
-            view.Refresh();
-        }
+        // Закрытие файла
+        fileStream.Close();
+    }
+
+//private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+//        {
+//            e.Handled = true;
+
+//            DataGridColumn column = e.Column;
+//            ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+//            column.SortDirection = direction;
+
+//            ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
+//            view.SortDescriptions.Clear();
+//            view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
+//            view.Refresh();
+//        }
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
             List<ToDoModel> filteredItems = _todoDataList.Where(item => item.Text.Contains(searchText)).ToList();
             dgToDoList.ItemsSource = filteredItems;
         }
-        //private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    ICollectionView cv = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
-        //    if (cv == null)
-        //        return;
-        //    if (!string.IsNullOrEmpty(SearchBox.Text))
-        //    {
-        //        cv.Filter = o =>
-        //        {
-        //            if (o is ToDoModel item)
-        //            {
 
-        //                return item.Text.IndexOf(SearchBox.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-        //            }
-        //            return false;
-        //        };
-        //    }
-        //    else
-        //    {
-        //        cv.Filter = null;
-        //    }
-        //}
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // Применяем выбранный шрифт ко всем столбцам
+            dgToDoList.FontFamily = fontComboBox.SelectedItem as FontFamily;
+        }
 
     }
 
