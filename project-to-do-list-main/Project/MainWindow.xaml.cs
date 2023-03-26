@@ -34,8 +34,8 @@ namespace Project
         {
             InitializeComponent();
         }
- 
-            private void Window_Loaded(object sender, RoutedEventArgs e)
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             fileIOService = new FileIOService(FilePath);
             try
@@ -47,7 +47,7 @@ namespace Project
                 MessageBox.Show(ex.Message);
                 Close();
             }
-            
+
             dgToDoList.ItemsSource = _todoDataList;
             _todoDataList.ListChanged += _todoDataList_ListChanged;
 
@@ -56,12 +56,12 @@ namespace Project
                 this.myDateTime.Text = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
             }, this.Dispatcher);
             timer.Start();
-            
+
         }
 
         private void _todoDataList_ListChanged(object sender, ListChangedEventArgs e)
         {
-            if (e.ListChangedType== ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
+            if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
             {
                 try
                 {
@@ -75,34 +75,34 @@ namespace Project
             }
         }
         public void FillListWithData()
-        { 
-        // Создание файла для записи сериализованных данных
-        FileStream fileStream = new FileStream("myList.bin", FileMode.Create);
+        {
+            // Создание файла для записи сериализованных данных
+            FileStream fileStream = new FileStream("myList.bin", FileMode.Create);
 
-        // Создание объекта BinaryFormatter для сериализации списка
-        BinaryFormatter binaryFormatter = new BinaryFormatter();
+            // Создание объекта BinaryFormatter для сериализации списка
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
 
-        // Сериализация списка в файл
-        binaryFormatter.Serialize(fileStream, dgToDoList);
+            // Сериализация списка в файл
+            binaryFormatter.Serialize(fileStream, dgToDoList);
 
-        // Закрытие файла
-        fileStream.Close();
-    }
+            // Закрытие файла
+            fileStream.Close();
+        }
 
-//private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
-//        {
-//            e.Handled = true;
+        private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
+        {
+            e.Handled = true;
 
-//            DataGridColumn column = e.Column;
-//            ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            DataGridColumn column = e.Column;
+            ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
-//            column.SortDirection = direction;
+            column.SortDirection = direction;
 
-//            ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
-//            view.SortDescriptions.Clear();
-//            view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
-//            view.Refresh();
-//        }
+            ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
+            view.SortDescriptions.Clear();
+            view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
+            view.Refresh();
+        }
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
@@ -115,7 +115,24 @@ namespace Project
             // Применяем выбранный шрифт ко всем столбцам
             dgToDoList.FontFamily = fontComboBox.SelectedItem as FontFamily;
         }
+        private void FontSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)FontSizeComboBox.SelectedItem;
+            string fontSize = selectedItem.Content.ToString();
 
+            switch (fontSize)
+            {
+                case "Small":
+                    dgToDoList.FontSize = 16;
+                    break;
+                case "Medium":
+                    dgToDoList.FontSize = 28;
+                    break;
+                case "Large":
+                    dgToDoList.FontSize = 34;
+                    break;
+            }
+        }
     }
 
 }

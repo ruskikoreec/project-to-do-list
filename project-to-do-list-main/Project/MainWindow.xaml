@@ -16,24 +16,42 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="167*"/>
+            <RowDefinition Height="231*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!-- Toolbar -->
-        <ToolBar Grid.Row="0" VerticalAlignment="Top">
-            <ComboBox x:Name="fontComboBox" Width="120" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
+
+        <ToolBar Grid.Row="0" VerticalAlignment="Top" Height="25" RenderTransformOrigin="0.684,1.579">
+
+            <TextBox x:Name="razmer"  Margin="0,2,0,3" FontSize="12" Text="Размер текста:" Width="88" Background="{x:Null}" BorderBrush="{x:Null}"></TextBox>
+            <ComboBox x:Name="FontSizeComboBox" SelectionChanged="FontSizeComboBox_SelectionChanged" Margin="0" Width="112">
+                <ComboBoxItem>Small</ComboBoxItem>
+                <ComboBoxItem>Medium</ComboBoxItem>
+                <ComboBoxItem>Large</ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="Shrift"  Margin="0,2,0,3" FontSize="12" Text="Шрифт:" Width="49" Background="{x:Null}" BorderBrush="{x:Null}"></TextBox>
+            <ComboBox x:Name="fontComboBox" Width="120"  ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
                       SelectedItem="{Binding FontFamily, ElementName=dataGrid}" />
-            <Button Content="Apply" Click="Button_Click" />
+            <Button Content="Применить" Click="Button_Click" Margin="0,2,0,3" Width="71" Height="22" FontSize="12" >
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFFEFFFF" Offset="1"/>
+                        <GradientStop Color="#FFA4E2E2"/>
+                        <GradientStop Color="#FFD9F3F3" Offset="0.387"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
         </ToolBar>
 
-        <StatusBar Grid.Row="1">
+        <StatusBar Grid.Row="2">
             <StatusBarItem HorizontalContentAlignment="Right">
                 <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}Время: {0:HH:mm:ss} Дата: {0:dd.MM.yyyy}'}" x:Name="myDateTime" />
 
             </StatusBarItem>
 
         </StatusBar>
-        <DataGrid x:Name="dgToDoList" FontSize="17" FontWeight="Bold" Margin="10,67,10,6" AutoGenerateColumns="False" >
+        <DataGrid CanUserSortColumns="True" x:Name="dgToDoList"  FontSize="17" FontWeight="Bold" Margin="10,67,10,6" AutoGenerateColumns="False" Sorting="dataGrid_Sorting" Grid.RowSpan="2">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -41,28 +59,28 @@
             </DataGrid.Resources>
             <DataGrid.Columns>
 
-                
-                <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Выполнено" Width="112" />
+
+                <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Выполнено" Width="107"  />
                 <DataGridTextColumn Binding="{Binding Text}" SortMemberPath="ToDo" IsReadOnly="False" Header="Нужно сделать" Width="*"/>
-                <DataGridTemplateColumn Header="Срок" Width="182" CellStyle="{StaticResource DateStyle}">
+                <DataGridTemplateColumn Header="Срок" Width="*" CellStyle="{StaticResource DateStyle}" >
                     <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding  Deadline}" TextAlignment="Center" />
+                        <DataTemplate >
+                            <TextBlock Text="{Binding  Deadline}" TextAlignment="Center"  />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            
-                            <DatePicker SelectedDate="{Binding Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}" />
+
+                            <DatePicker SelectedDate="{Binding Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}"  />
 
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True"  Header="Дата Создания" Width="182"/>
+                <DataGridTextColumn Binding="{Binding CreationDate}" IsReadOnly="True"  Header="Дата Создания" Width="*" SortDirection="Descending"/>
             </DataGrid.Columns>
 
         </DataGrid>
-        <StackPanel>
+        <StackPanel Grid.RowSpan="2">
             <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  Margin="151,30,10,342" FontSize="22"
 
             HorizontalAlignment="Stretch" 
@@ -71,7 +89,7 @@
             Height="Auto" />
 
         </StackPanel>
-        <TextBox x:Name="Search"  Margin="31,24,650,333" FontSize="28" Text="Поиск:" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
+        <TextBox x:Name="Search"  Margin="31,25,650,101.5" FontSize="28" Text="Поиск:" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
  />
 
 
