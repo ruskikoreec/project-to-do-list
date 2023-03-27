@@ -11,10 +11,13 @@ namespace Project.Models
     internal class ToDoModel : INotifyPropertyChanged
 
     {
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+   
         private string _text;
         private bool _isDone;
         private DateTime _deadline = DateTime.Now;
+        private string _propertyName;
+
+
 
         public bool IsDone
         {
@@ -25,6 +28,17 @@ namespace Project.Models
                     return;
                 _isDone = value;
                 OnPropertyChanged("IsDone");
+            }
+        }
+        public string PropertyName
+        {
+            get { return _propertyName; }
+            set
+            {
+                if (_propertyName == value)
+                    return;
+                _propertyName = value;
+                OnPropertyChanged("PropertyName");
             }
         }
         public string Text

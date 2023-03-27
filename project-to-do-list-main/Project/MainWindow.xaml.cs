@@ -139,25 +139,21 @@ namespace Project
         }
         private void sortButton_Click(object sender, RoutedEventArgs e)
         {
-            // Получаем свойство "Text" для сортировки
+
             PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["IsDone"];
 
-            // Сортируем элементы по свойству "Text"
+
             ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
 
-            // Обновляем источник данных таблицы
             dgToDoList.ItemsSource = ToDoModelList;
         }
 
         private void sortButton_Click2(object sender, RoutedEventArgs e)
         {
-            // Получаем свойство "Text" для сортировки
             PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Deadline"];
 
-            // Сортируем элементы по свойству "Text"
             ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
 
-            // Обновляем источник данных таблицы
             dgToDoList.ItemsSource = ToDoModelList;
         }
 
