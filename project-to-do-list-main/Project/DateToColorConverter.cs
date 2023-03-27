@@ -16,7 +16,7 @@ namespace Project
 
             return(DateTime)value < DateTime.Now ?
             
-                new SolidColorBrush(Colors.OrangeRed)
+                new SolidColorBrush(Colors.IndianRed)
                 : new SolidColorBrush(Colors.White);
             
         }

@@ -7,7 +7,7 @@
     
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
-        Title="Список дел" Height="450" Width="800" Icon="/Icon/todo.ico" Loaded="Window_Loaded" Background="#FF8ABFBF" Foreground="{x:Null}" FontFamily="Lucida Sans">
+        Title="Список дел" Height="667.5" Width="1090.5" Icon="/Icon/todo.ico" Loaded="Window_Loaded" Background="#FF8ABFBF" Foreground="{x:Null}" FontFamily="Lucida Sans">
     <Window.Resources>
         <local:DateToColorConverter x:Key="DateToColorConverter"/>
         <Style x:Key="DateStyle" TargetType="{x:Type DataGridCell}">
@@ -20,21 +20,30 @@
             <RowDefinition Height="231*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <!-- Toolbar -->
-
-        <ToolBar Grid.Row="0" VerticalAlignment="Top" Height="42" RenderTransformOrigin="0.684,1.579">
-
-            <TextBox x:Name="razmer" FontSize="16" Text="Размер текста:" IsReadOnly="True"  Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Height="64"/>
-            <ComboBox x:Name="FontSizeComboBox" SelectionChanged="FontSizeComboBox_SelectionChanged" Width="162">
+        <!-- Toolbar сортировка, размер текста, шрифт-->
+        <ToolBar Grid.Row="0" VerticalAlignment="Top" Height="52" RenderTransformOrigin="0.684,1.579">
+            <!--сортировка-->
+            <TextBox x:Name="sort" FontSize="16" Text="Сортировать по:" IsReadOnly="True"  Width="131" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Margin="0,-12,0,-14"/>
+            <ComboBox x:Name="Sorting" SelectionChanged="SortingComboBox_SelectionChanged" Width="142" Margin="10,10,0,7">
+                <ComboBoxItem>Выполненным</ComboBoxItem>
+                <ComboBoxItem>Невыполненным</ComboBoxItem>
+                <ComboBoxItem>Новым задачам</ComboBoxItem>
+                <ComboBoxItem>Старым задачам</ComboBoxItem>
+                <ComboBoxItem>Важным</ComboBoxItem>
+                <ComboBoxItem>Неважным</ComboBoxItem>
+            </ComboBox>
+            <!--размер-->
+            <TextBox x:Name="razmer" FontSize="16" Text="Размер текста:" IsReadOnly="True"  Width="119" Background="{x:Null}" BorderBrush="{x:Null}" Height="64" Margin="0,-12,0,-14"/>
+            <ComboBox x:Name="FontSizeComboBox" SelectionChanged="FontSizeComboBox_SelectionChanged" Width="162" Margin="0,10,0,9">
                 <ComboBoxItem>Уменьшенный</ComboBoxItem>
                 <ComboBoxItem>По умолчанию</ComboBoxItem>
                 <ComboBoxItem>Увеличенный</ComboBoxItem>
-
             </ComboBox>
+            <!--шрифт-->
             <TextBox x:Name="Shrift" FontSize="16" Text="Шрифт:" IsReadOnly="True" Width="67" Background="{x:Null}" BorderBrush="{x:Null}"/>
             <ComboBox x:Name="fontComboBox" Width="120"  ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"
                       SelectedItem="{Binding FontFamily, ElementName=dataGrid}" />
-            <Button Content="Применить" Click="Button_Click" Width="99" Height="26" FontSize="16" HorizontalAlignment="Left" BorderBrush="#FF2B1313" >
+            <Button Content="Применить" Click="ShriftChanged" Width="99" Height="26" FontSize="16" HorizontalAlignment="Left" BorderBrush="#FF2B1313" Margin="10,6,0,5" >
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                         <GradientStop Color="#FFE8FFFF" Offset="1"/>
@@ -43,29 +52,26 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
-            <Button Content="Сортировать: выполнено" Click="sortButton_Click" />
-            <Button Content="Сортировать: срок" Click="sortButton_Click2" />
-            <Button Content="Сортировать: срок" Click="sortButton_Click3" />
         </ToolBar>
-
+        <!--текущая дата внизу-->
         <StatusBar Grid.Row="2">
             <StatusBarItem HorizontalContentAlignment="Right">
                 <TextBlock Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='{}Время: {0:HH:mm:ss} Дата: {0:dd.MM.yyyy}'}" x:Name="myDateTime" />
-
             </StatusBarItem>
-
         </StatusBar>
-        <DataGrid CanUserSortColumns="True" x:Name="dgToDoList"  FontSize="16" FontWeight="Bold" Margin="10,114,10,0" AutoGenerateColumns="False"  Grid.RowSpan="2">
+        <!--столбцы-->
+        <DataGrid CanUserSortColumns="True" x:Name="dgToDoList"  FontSize="16" FontWeight="Bold" Margin="10,106,10,0" AutoGenerateColumns="False"  Grid.RowSpan="2">
             <DataGrid.Resources>
                 <Style TargetType="DataGridColumnHeader">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-
-
+                <!--чекбокс-->
                 <DataGridCheckBoxColumn Binding="{Binding IsDone, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="False" Header="Выполнено" Width="107"  />
+                <!--нужно сделать-->
                 <DataGridTextColumn Binding="{Binding Text}" IsReadOnly="False" Header="Нужно сделать" Width="*"/>
+                <!--дедлайн-->
                 <DataGridTemplateColumn Header="Срок" Width="*" CellStyle="{StaticResource DateStyle}" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate >
@@ -74,12 +80,11 @@
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-
                             <DatePicker SelectedDate="{Binding Deadline, Mode=TwoWay, UpdateSourceTrigger =PropertyChanged}"  />
-
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
+                <!--важность-->
                 <DataGridComboBoxColumn Header="Важность" SelectedItemBinding="{Binding Importance}" Width="130" >
                     <DataGridComboBoxColumn.ItemsSource>
                         <x:Array Type="{x:Type sys:String}">
@@ -89,18 +94,18 @@
                     </DataGridComboBoxColumn.ItemsSource>
                 </DataGridComboBoxColumn>
             </DataGrid.Columns>
-
         </DataGrid>
+        
         <StackPanel RenderTransformOrigin="0.501,0.739" Height="69" VerticalAlignment="Top" Margin="-8,32,8,0">
+            <!--строка поиска-->
             <TextBox x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  Margin="151,30,10,342" FontSize="22"
-
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch"
             Width="Auto"
-            Height="Auto" />
-
+            Height="36" />
         </StackPanel>
-        <TextBox x:Name="Search"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,57,651,70" FontSize="28" Text="Поиск:" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
+        <!--поиск-->
+        <TextBox x:Name="Search"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,61,0,0" FontSize="28" Text="Поиск:" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="Underline" FontWeight="Bold"
  />
 
 
