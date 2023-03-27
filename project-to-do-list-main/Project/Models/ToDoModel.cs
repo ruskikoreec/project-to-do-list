@@ -15,7 +15,7 @@ namespace Project.Models
         private string _text;
         private bool _isDone;
         private DateTime _deadline = DateTime.Now;
-        private string _propertyName;
+        private string _importance;
 
 
 
@@ -30,15 +30,15 @@ namespace Project.Models
                 OnPropertyChanged("IsDone");
             }
         }
-        public string PropertyName
+        public string Importance
         {
-            get { return _propertyName; }
+            get { return _importance; }
             set
             {
-                if (_propertyName == value)
+                if (_importance == value)
                     return;
-                _propertyName = value;
-                OnPropertyChanged("PropertyName");
+                _importance = value;
+                OnPropertyChanged("Importance");
             }
         }
         public string Text

@@ -139,24 +139,63 @@ namespace Project
         }
         private void sortButton_Click(object sender, RoutedEventArgs e)
         {
-
             PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["IsDone"];
 
+            if (ToDoModelList != null)
+            {
+                // Если список уже был отсортирован в возрастающем порядке
+                if (ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList().SequenceEqual(ToDoModelList))
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
+                }
+                else
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+                }
 
-            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
-
-            dgToDoList.ItemsSource = ToDoModelList;
+                dgToDoList.ItemsSource = ToDoModelList;
+            }
         }
+
 
         private void sortButton_Click2(object sender, RoutedEventArgs e)
         {
             PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Deadline"];
 
-            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+            if (ToDoModelList != null)
+            {
+                // Если список уже был отсортирован в возрастающем порядке
+                if (ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList().SequenceEqual(ToDoModelList))
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
+                }
+                else
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+                }
 
-            dgToDoList.ItemsSource = ToDoModelList;
+                dgToDoList.ItemsSource = ToDoModelList;
+            }
         }
+        private void sortButton_Click3(object sender, RoutedEventArgs e)
+        {
+            PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Importance"];
 
+            if (ToDoModelList != null)
+            {
+                // Если список уже был отсортирован в возрастающем порядке
+                if (ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList().SequenceEqual(ToDoModelList))
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
+                }
+                else
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+                }
+
+                dgToDoList.ItemsSource = ToDoModelList;
+            }
+        }
     }
 
 }

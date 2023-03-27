@@ -45,6 +45,7 @@
             </Button>
             <Button Content="Сортировать: выполнено" Click="sortButton_Click" />
             <Button Content="Сортировать: срок" Click="sortButton_Click2" />
+            <Button Content="Сортировать: срок" Click="sortButton_Click3" />
         </ToolBar>
 
         <StatusBar Grid.Row="2">
@@ -79,7 +80,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <DataGridComboBoxColumn Header="Важность" SelectedItemBinding="{Binding PropertyName}" Width="130" >
+                <DataGridComboBoxColumn Header="Важность" SelectedItemBinding="{Binding Importance}" Width="130" >
                     <DataGridComboBoxColumn.ItemsSource>
                         <x:Array Type="{x:Type sys:String}">
                             <sys:String>Важно</sys:String>
