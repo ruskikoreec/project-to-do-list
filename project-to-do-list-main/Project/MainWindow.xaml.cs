@@ -112,8 +112,14 @@ namespace Project
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Применяем выбранный шрифт ко всем столбцам
+            try 
+            { // Применяем выбранный шрифт ко всем столбцам
             dgToDoList.FontFamily = fontComboBox.SelectedItem as FontFamily;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show($"Ошибка: Выберите, пожалуйста, шрифт!");
+            }
         }
         private void FontSizeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -122,17 +128,44 @@ namespace Project
 
             switch (fontSize)
             {
-                case "Small":
-                    dgToDoList.FontSize = 16;
+                case "Уменьшенный":
+                    {
+                        dgToDoList.FontSize = 12;
+                        razmer.FontSize = 12;
+                        FontSizeComboBox.FontSize = 12;
+                        Shrift.FontSize = 12;
+                        fontComboBox.FontSize = 12;
+                        razmer.Width = 90;
+                        Shrift.Width = 54;
+                    }
                     break;
-                case "Medium":
-                    dgToDoList.FontSize = 28;
+                case "По умолчанию":
+                    {
+                        dgToDoList.FontSize = 16;
+                        razmer.FontSize = 16;
+                        FontSizeComboBox.FontSize = 16;
+                        Shrift.FontSize = 16;
+                        fontComboBox.FontSize = 16;
+                        razmer.Width = 119;
+                        Shrift.Width = 67;
+                    }
                     break;
-                case "Large":
-                    dgToDoList.FontSize = 34;
+                case "Увеличенный":
+                    {
+                        dgToDoList.FontSize = 22;
+                        razmer.FontSize = 22;
+                        FontSizeComboBox.FontSize = 22;
+                        Shrift.FontSize = 22;
+                        fontComboBox.FontSize = 22;
+                        razmer.Width = 155;
+                        Shrift.Width = 92;
+
+                    }
                     break;
+
             }
         }
+
     }
 
 }

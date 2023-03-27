@@ -15,8 +15,6 @@ namespace Project.Models
         private string _text;
         private bool _isDone;
         private DateTime _deadline = DateTime.Now;
-      
-
 
         public bool IsDone
         {

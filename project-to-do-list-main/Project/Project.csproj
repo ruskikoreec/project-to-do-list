@@ -61,7 +61,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CollectionViewSource.cs" />
     <Compile Include="DateToColorConverter.cs" />
     <Compile Include="Service\FileIOService.cs" />
     <Page Include="MainWindow.xaml">
