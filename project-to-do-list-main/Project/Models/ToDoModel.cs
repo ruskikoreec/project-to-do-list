@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
-    [Serializable]
+   
     internal class ToDoModel : INotifyPropertyChanged
 
     {

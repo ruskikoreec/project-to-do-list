@@ -43,6 +43,8 @@
                     </LinearGradientBrush>
                 </Button.Background>
             </Button>
+            <Button Content="Сортировать: выполнено" Click="sortButton_Click" />
+            <Button Content="Сортировать: срок" Click="sortButton_Click2" />
         </ToolBar>
 
         <StatusBar Grid.Row="2">

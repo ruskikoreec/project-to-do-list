@@ -20,6 +20,7 @@ using System.Windows.Threading;
 using System.Data;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using static Project.Sort;
 
 namespace Project
 {
@@ -28,7 +29,7 @@ namespace Project
     {
 
         private readonly string FilePath = $"{Environment.CurrentDirectory}\\todoDataList.json";
-        private BindingList<ToDoModel> _todoDataList;
+        private BindingList<ToDoModel> ToDoModelList;
         private FileIOService fileIOService;
         public MainWindow()
         {
@@ -40,7 +41,7 @@ namespace Project
             fileIOService = new FileIOService(FilePath);
             try
             {
-                _todoDataList = fileIOService.LoadData();
+                ToDoModelList = fileIOService.LoadData();
             }
             catch (Exception ex)
             {
@@ -48,8 +49,8 @@ namespace Project
                 Close();
             }
 
-            dgToDoList.ItemsSource = _todoDataList;
-            _todoDataList.ListChanged += _todoDataList_ListChanged;
+            dgToDoList.ItemsSource = ToDoModelList;
+            ToDoModelList.ListChanged += ToDoModelList_ListChanged;
 
             DispatcherTimer timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
             {
@@ -59,7 +60,7 @@ namespace Project
 
         }
 
-        private void _todoDataList_ListChanged(object sender, ListChangedEventArgs e)
+        private void ToDoModelList_ListChanged(object sender, ListChangedEventArgs e)
         {
             if (e.ListChangedType == ListChangedType.ItemAdded || e.ListChangedType == ListChangedType.ItemDeleted || e.ListChangedType == ListChangedType.ItemChanged)
             {
@@ -74,39 +75,10 @@ namespace Project
                 }
             }
         }
-        public void FillListWithData()
-        {
-            // Создание файла для записи сериализованных данных
-            FileStream fileStream = new FileStream("myList.bin", FileMode.Create);
-
-            // Создание объекта BinaryFormatter для сериализации списка
-            BinaryFormatter binaryFormatter = new BinaryFormatter();
-
-            // Сериализация списка в файл
-            binaryFormatter.Serialize(fileStream, dgToDoList);
-
-            // Закрытие файла
-            fileStream.Close();
-        }
-
-        private void dataGrid_Sorting(object sender, DataGridSortingEventArgs e)
-        {
-            e.Handled = true;
-
-            DataGridColumn column = e.Column;
-            ListSortDirection direction = (column.SortDirection != ListSortDirection.Ascending) ? ListSortDirection.Ascending : ListSortDirection.Descending;
-
-            column.SortDirection = direction;
-
-            ICollectionView view = CollectionViewSource.GetDefaultView(dgToDoList.ItemsSource);
-            view.SortDescriptions.Clear();
-            view.SortDescriptions.Add(new SortDescription(column.SortMemberPath, direction));
-            view.Refresh();
-        }
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
-            List<ToDoModel> filteredItems = _todoDataList.Where(item => item.Text.Contains(searchText)).ToList();
+            List<ToDoModel> filteredItems = ToDoModelList.Where(item => item.Text.Contains(searchText)).ToList();
             dgToDoList.ItemsSource = filteredItems;
         }
 
@@ -164,6 +136,29 @@ namespace Project
                     break;
 
             }
+        }
+        private void sortButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем свойство "Text" для сортировки
+            PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["IsDone"];
+
+            // Сортируем элементы по свойству "Text"
+            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+
+            // Обновляем источник данных таблицы
+            dgToDoList.ItemsSource = ToDoModelList;
+        }
+
+        private void sortButton_Click2(object sender, RoutedEventArgs e)
+        {
+            // Получаем свойство "Text" для сортировки
+            PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Deadline"];
+
+            // Сортируем элементы по свойству "Text"
+            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+
+            // Обновляем источник данных таблицы
+            dgToDoList.ItemsSource = ToDoModelList;
         }
 
     }
