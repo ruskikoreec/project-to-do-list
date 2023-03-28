@@ -19,6 +19,8 @@ namespace Project
         private readonly string FilePath = $"{Environment.CurrentDirectory}\\todoDataList.json";
         private BindingList<ToDoModel> ToDoModelList;
         private FileIOService fileIOService;
+        private IOFont iofont;
+        private FontSettings fontSettings;
         public MainWindow()
         {
             InitializeComponent();
@@ -28,9 +30,13 @@ namespace Project
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             fileIOService = new FileIOService(FilePath);
+            iofont = new IOFont();
             try
             {
                 ToDoModelList = fileIOService.LoadData();
+                fontSettings = iofont.LoadSettings();
+                ChangeFontSize(fontSettings.fontSize, fontSettings.razmerWidth, fontSettings.shriftWidth, fontSettings.sortWidth);
+                dgToDoList.FontFamily = fontSettings.fontFamily as FontFamily;
             }
             catch (Exception ex)
             {
@@ -66,6 +72,7 @@ namespace Project
             }
         }
 
+
         //cтрока поиска
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -77,9 +84,10 @@ namespace Project
         //изменение шрифта
         private void ShriftChanged(object sender, RoutedEventArgs e)
         {
-            try 
-            { 
-            dgToDoList.FontFamily = fontComboBox.SelectedItem as FontFamily;
+            try
+            {
+               dgToDoList.FontFamily = fontComboBox.SelectedItem as FontFamily;
+                fontSettings.fontFamily = dgToDoList.FontFamily as FontFamily;
             }
             catch (Exception)
             {
@@ -121,9 +129,13 @@ namespace Project
             fontComboBox.FontSize = fontSize;
             Sorting.FontSize = fontSize;
             sort.FontSize = fontSize;
+            fontSettings.fontSize = fontSize;
             razmer.Width = razmerWidth;
+            fontSettings.razmerWidth = razmerWidth;
             Shrift.Width = shriftWidth;
+            fontSettings.shriftWidth = shriftWidth;
             sort.Width = sortWidth;
+            fontSettings.sortWidth = sortWidth;
         }
 
         //Сортировка столбцов
@@ -172,6 +184,19 @@ namespace Project
                 }
 
                 dgToDoList.ItemsSource = ToDoModelList;
+            }
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            try
+            {
+                iofont.SaveSettings(fontSettings);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Close();
             }
         }
     }

@@ -61,7 +61,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\FontSettings.cs" />
     <Compile Include="Service\EnDeCryption.cs" />
+    <Compile Include="Service\IOFont.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="IComparerToDo.cs" />
     <Compile Include="DateToColorConverter.cs" />
