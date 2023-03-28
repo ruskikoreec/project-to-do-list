@@ -13,9 +13,11 @@ namespace Project.Service
     class FileIOService
     {
         private readonly string FilePath;
+        private readonly ICripter cripter;
         public FileIOService(string filePath)
         {
             FilePath = filePath;
+            cripter = new EnDeCryption();
         }
         public BindingList<ToDoModel> LoadData()
         {
@@ -28,15 +30,17 @@ namespace Project.Service
             }
             using (var reader = File.OpenText(FilePath))
             {
-                var fileText = reader.ReadToEnd();
+                string fileText = reader.ReadToEnd();
+                fileText = cripter.Decryption(fileText);
                 return JsonConvert.DeserializeObject<BindingList<ToDoModel>>(fileText);
             }
         }
         public void SaveData(object todoDataList)
         {
-            using(StreamWriter writer = File.CreateText(FilePath))
+            using (StreamWriter writer = File.CreateText(FilePath))
             {
                 string output = JsonConvert.SerializeObject(todoDataList);
+                output = cripter.Encryption(output);
                 writer.Write(output);
             }
         }
