@@ -13,12 +13,14 @@ namespace Project
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            return(DateTime)value < DateTime.Now ?
-            
-                new SolidColorBrush(Colors.IndianRed)
-                : new SolidColorBrush(Colors.White);
-            
+            if ((DateTime)value < DateTime.Now)
+            {
+                return new SolidColorBrush(Colors.IndianRed);
+            }
+            else
+            {
+                return new SolidColorBrush(Colors.White);
+            }
         }
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

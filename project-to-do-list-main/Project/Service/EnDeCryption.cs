@@ -23,6 +23,7 @@ namespace Project.Service
             string output = new string(Cesar);
             return output;
         }
+
         public string Decryption(string input)
         {
             char[] CesarBack = input.ToCharArray();

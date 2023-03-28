@@ -9,15 +9,12 @@ namespace Project.Models
 {
    
     internal class ToDoModel : INotifyPropertyChanged
-
     {
-   
         private string _text;
         private bool _isDone;
         private DateTime _deadline = DateTime.Now;
         private string _importance;
-
-
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsDone
         {
@@ -30,6 +27,7 @@ namespace Project.Models
                 OnPropertyChanged("IsDone");
             }
         }
+
         public string Importance
         {
             get { return _importance; }
@@ -41,6 +39,7 @@ namespace Project.Models
                 OnPropertyChanged("Importance");
             }
         }
+
         public string Text
         {
             get { return _text; }
@@ -52,6 +51,7 @@ namespace Project.Models
                 OnPropertyChanged("Text");
             }
         }
+
         public DateTime Deadline
         {
             get { return _deadline; }
@@ -63,8 +63,7 @@ namespace Project.Models
                 OnPropertyChanged("Deadline");
             }
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-
+        
         protected virtual void OnPropertyChanged(string propertyName ="")
         {
             if (PropertyChanged != null)

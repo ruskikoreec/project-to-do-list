@@ -62,7 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Service\EnDeCryption.cs" />
-    <Compile Include="Service\EnDeCryptionBase.cs" />
     <Compile Include="Sort.cs" />
     <Compile Include="IComparerToDo.cs" />
     <Compile Include="DateToColorConverter.cs" />

@@ -3,24 +3,12 @@ using Project.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Data;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using static Project.Sort;
 
 namespace Project
 {
@@ -35,6 +23,7 @@ namespace Project
         {
             InitializeComponent();
         }
+
         //загрузка окна
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -54,11 +43,12 @@ namespace Project
 
             DispatcherTimer timer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, (object s, EventArgs ev) =>
             {
-                this.myDateTime.Text = DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss");
+                this.myDateTime.Text = DateTime.Now.ToString("Время: HH:mm:ss Дата: dd.MM.yyyy");
             }, this.Dispatcher);
             timer.Start();
 
         }
+
         //изменения в списке
         private void ToDoModelList_ListChanged(object sender, ListChangedEventArgs e)
         {
@@ -75,13 +65,15 @@ namespace Project
                 }
             }
         }
-        //кнопка поиска
+
+        //cтрока поиска
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
             List<ToDoModel> filteredItems = ToDoModelList.Where(item => item.Text.Contains(searchText)).ToList();
             dgToDoList.ItemsSource = filteredItems;
         }
+
         //изменение шрифта
         private void ShriftChanged(object sender, RoutedEventArgs e)
         {
@@ -104,49 +96,36 @@ namespace Project
             {
                 case "Уменьшенный":
                     {
-                        dgToDoList.FontSize = 12;
-                        razmer.FontSize = 12;
-                        FontSizeComboBox.FontSize = 12;
-                        Shrift.FontSize = 12;
-                        fontComboBox.FontSize = 12;
-                        Sorting.FontSize = 12;
-                        sort.FontSize = 12;
-                        razmer.Width = 90;
-                        Shrift.Width = 54;
-                        sort.Width = 99;
+                        ChangeFontSize(12, 90, 54, 99);
                     }
                     break;
                 case "По умолчанию":
                     {
-                        dgToDoList.FontSize = 16;
-                        razmer.FontSize = 16;
-                        FontSizeComboBox.FontSize = 16;
-                        Shrift.FontSize = 16;
-                        fontComboBox.FontSize = 16;
-                        Sorting.FontSize = 16;
-                        sort.FontSize = 16;
-                        razmer.Width = 119;
-                        Shrift.Width = 67;
-                        sort.Width = 131;
+                        ChangeFontSize(16, 119, 67, 131);
                     }
                     break;
                 case "Увеличенный":
                     {
-                        dgToDoList.FontSize = 22;
-                        razmer.FontSize = 22;
-                        FontSizeComboBox.FontSize = 22;
-                        Shrift.FontSize = 22;
-                        fontComboBox.FontSize = 22;
-                        Sorting.FontSize = 22;
-                        sort.FontSize = 22;
-                        razmer.Width = 155;
-                        Shrift.Width = 92;
-                        sort.Width = 179;
-
+                        ChangeFontSize(22, 155, 92, 179);
                     }
                     break;
             }
         }
+
+        private void ChangeFontSize(int fontSize, int razmerWidth, int shriftWidth, int sortWidth)
+        {
+            dgToDoList.FontSize = fontSize;
+            razmer.FontSize = fontSize;
+            FontSizeComboBox.FontSize = fontSize;
+            Shrift.FontSize = fontSize;
+            fontComboBox.FontSize = fontSize;
+            Sorting.FontSize = fontSize;
+            sort.FontSize = fontSize;
+            razmer.Width = razmerWidth;
+            Shrift.Width = shriftWidth;
+            sort.Width = sortWidth;
+        }
+
         //Сортировка столбцов
         private void SortingComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -156,81 +135,44 @@ namespace Project
             switch (sorting)
             {
                 case "Выполненным":
-                    {
-                        PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["IsDone"];
-                        if (ToDoModelList != null)
-                        {
-                           
-                                ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
-                            
-                            dgToDoList.ItemsSource = ToDoModelList;
-                        }
-                    }
-                break;
+                    ChangeToDoListDIrection("IsDone", true);
+                    break;
                 case "Невыполненным":
-                    {
-                        PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["IsDone"];
-                        if (ToDoModelList != null)
-                        {
-
-                            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
-
-                            dgToDoList.ItemsSource = ToDoModelList;
-                        }
-                    }
+                    ChangeToDoListDIrection("IsDone", false);
                     break;
                 case "Новым задачам":
-                    {
-                        PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Deadline"];
-                        if (ToDoModelList != null)
-                        {
-
-                            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
-
-                            dgToDoList.ItemsSource = ToDoModelList;
-                        }
-                    }
+                    ChangeToDoListDIrection("Deadline", true);
                     break;
                 case "Старым задачам":
-                    {
-                        PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Deadline"];
-
-                          if (ToDoModelList != null)
-                        {
-                            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
-                        }
-                        dgToDoList.ItemsSource = ToDoModelList;
-
-                    }
+                    ChangeToDoListDIrection("Deadline", false);
                     break;
                 case "Неважным":
-                    {
-                        PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Importance"];
-                        if (ToDoModelList != null)
-                        {
-
-                            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
-
-                            dgToDoList.ItemsSource = ToDoModelList;
-                        }
-                    }
+                    ChangeToDoListDIrection("Importance", true);
                     break;
                 case "Важным":
-                    {
-                        PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))["Importance"];
-                        if (ToDoModelList != null)
-                        {
-
-                            ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
-
-                            dgToDoList.ItemsSource = ToDoModelList;
-                        }
-                    }
+                    ChangeToDoListDIrection("Importance", false);
                     break;
-
 
             }
 
+        }
+
+        private void ChangeToDoListDIrection(string property, bool sortingDescinding)
+        {
+            PropertyDescriptor prop = TypeDescriptor.GetProperties(typeof(ToDoModel))[property];
+            if (ToDoModelList != null)
+            {
+                if (sortingDescinding)
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderByDescending(x => prop.GetValue(x)).ToList());
+                }
+                else
+                {
+                    ToDoModelList = new BindingList<ToDoModel>(ToDoModelList.OrderBy(x => prop.GetValue(x)).ToList());
+                }
+
+                dgToDoList.ItemsSource = ToDoModelList;
+            }
         }
     }
 }
